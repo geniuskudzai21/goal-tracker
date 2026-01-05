@@ -1,6 +1,6 @@
 # 2026 Goal Planner & Tracker
 
-https://geniuskudzai21.github.io/2k26/
+https://geniuskudzai21.github.io/goal-tracker/
 
 A comprehensive web-based goal planning and tracking application designed to help you organize, track, and achieve your goals throughout the year 2026.
 
