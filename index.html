@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 Goal Planner & Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar fade-in-left">
+        <div class="sidebar-header">
+            <div class="logo bounce-in">
+                <div class="logo-icon pulse">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>2026 Planner</h1>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-menu">
+            <a href="#" class="nav-item active fade-in-up delay-1" data-page="dashboard">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item fade-in-up delay-2" data-page="goals">
+                <i class="fas fa-bullseye"></i>
+                <span>Goals</span>
+            </a>
+            <a href="#" class="nav-item fade-in-up delay-3" data-page="projects">
+                <i class="fas fa-project-diagram"></i>
+                <span>Projects</span>
+            </a>
+            <a href="#" class="nav-item fade-in-up delay-4" data-page="notes">
+                <i class="fas fa-sticky-note"></i>
+                <span>Notes & Ideas</span>
+            </a>
+            <a href="#" class="nav-item fade-in-up delay-5" data-page="rules">
+                <i class="fas fa-book"></i>
+                <span>Rules & Motivation</span>
+            </a>
+            <a href="#" class="nav-item fade-in-up delay-6" data-page="skills">
+                <i class="fas fa-trophy"></i>
+                <span>Skills Learnt</span>
+            </a>
+        </div>
+        
+        <div class="sidebar-footer">
+            <div class="motivation-quote fade-in">
+                <p><i class="glitchs">"Dream Life LOading.."</i></p>
+                <p style="margin-top: 5px;">– Genius Kudzai</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content-wrapper">
+        <div class="main-content">
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="page-content active fade-in">
+            <div class="page-header fade-in-up">
+                <h2 class="page-title">Dashboard</h2>
+                <div class="page-actions">
+                    <button class="btn btn-outline" id="refresh-btn">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Motivation Card -->
+            <div class="card motivation-card bounce-in">
+                <div class="motivation-content">
+                    <i class="fas fa-lightbulb glow"></i>
+                    <div id="motivation-display" class="motivation-text">
+                        <p id="daily-motivation">Focus on what matters most today!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="dashboard-grid">
+                <div class="card stats-card fade-in-up delay-1">
+                    <div class="stat-icon" style="background-color: rgba(109, 40, 217, 0.2); color: var(--primary-light);">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <div class="stat-value" id="total-goals">0</div>
+                    <div class="stat-label">Total Goals</div>
+                </div>
+                
+                <div class="card stats-card fade-in-up delay-2">
+                    <div class="stat-icon" style="background-color: rgba(16, 185, 129, 0.2); color: var(--secondary);">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-value" id="completed-goals">0</div>
+                    <div class="stat-label">Completed Goals</div>
+                </div>
+                
+                <div class="card stats-card fade-in-up delay-3">
+                    <div class="stat-icon" style="background-color: rgba(59, 130, 246, 0.2); color: #3b82f6;">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-value" id="progress-percentage">0%</div>
+                    <div class="stat-label">Overall Progress</div>
+                </div>
+                
+                <div class="card stats-card fade-in-up delay-4">
+                    <div class="stat-icon" style="background-color: rgba(245, 158, 11, 0.2); color: var(--warning);">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="stat-value" id="total-ideas">0</div>
+                    <div class="stat-label">Ideas & Notes</div>
+                </div>
+                
+                <div class="card stats-card fade-in-up delay-5">
+                    <div class="stat-icon" style="background-color: rgba(139, 92, 246, 0.2); color: #8b5cf6;">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="stat-value"><span id="completed-projects">0</span>/<span id="total-projects">0</span></div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                
+                <div class="card stats-card fade-in-up delay-6">
+                    <div class="stat-icon" style="background-color: rgba(236, 72, 153, 0.2); color: #ec4899;">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-value"><span id="learnt-skills">0</span>/<span id="total-skills">0</span></div>
+                    <div class="stat-label">Skills Learnt</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Goals Page -->
+        <div id="goals-page" class="page-content fade-in">
+            <div class="page-header fade-in-up">
+                <h2 class="page-title">Goals Management</h2>
+                <div class="page-actions">
+                    <button class="btn btn-primary" id="add-goal-page-btn">
+                        <i></i> Add New Goal
+                    </button>
+                </div>
+            </div>
+            
+            <div class="tabs fade-in">
+                <div class="tab active" data-tab="all-goals">All Goals</div>
+                <div class="tab" data-tab="active-goals">Active</div>
+                <div class="tab" data-tab="completed-goals">Completed</div>
+            </div>
+            
+            <div class="tab-content active" id="all-goals">
+                <div class="card slide-in-up">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-list"></i> All 2026 Goals</h3>
+                        <div class="form-group" style="margin-bottom: 0; width: 200px;">
+                            <select id="goal-filter-category">
+                                <option value="all">All Categories</option>
+                                <option value="health">Health & Fitness</option>
+                                <option value="career">Career</option>
+                                <option value="education">Education</option>
+                                <option value="finance">Finance</option>
+                                <option value="personal">Personal Growth</option>
+                                <option value="hobbies">Hobbies</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="all-goals-list" class="goal-list">
+                        <!-- All goals will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="active-goals">
+                <div class="card slide-in-up">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-tasks"></i> Active Goals</h3>
+                    </div>
+                    <div id="active-goals-list" class="goal-list">
+                        <!-- Active goals will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="completed-goals">
+                <div class="card slide-in-up">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-check-circle"></i> Completed Goals</h3>
+                    </div>
+                    <div id="completed-goals-list" class="goal-list">
+                        <!-- Completed goals will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Projects Page -->
+        <div id="projects-page" class="page-content fade-in">
+            <div class="page-header fade-in-up">
+                <h2 class="page-title">Progress Projects</h2>
+                <div class="page-actions">
+                    <button class="btn btn-primary" id="add-project-btn">
+                        <i class="fas fa-plus"></i> Add Project
+                    </button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-project-diagram"></i> Your Projects</h3>
+                </div>
+                <div id="projects-container" class="projects-grid">
+                    <!-- Projects will be loaded here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notes & Ideas Page -->
+        <div id="notes-page" class="page-content fade-in">
+            <div class="page-header fade-in-up">
+                <h2 class="page-title">Notes & Ideas</h2>
+                <div class="page-actions">
+                    <button class="btn btn-primary" id="add-note-btn">
+                        <i class="fas fa-plus"></i> Add Note
+                    </button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-lightbulb"></i> Ideas & Notes</h3>
+                </div>
+                <div id="notes-container" class="notes-grid">
+                    <!-- Notes will be loaded here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rules & Motivation Page -->
+        <div id="rules-page" class="page-content fade-in">
+            <div class="page-header fade-in-up">
+                <h2 class="page-title">Rules & Motivation</h2>
+                <div class="page-actions">
+                    <button class="btn btn-primary" id="add-rule-btn">
+                        <i class="fas fa-plus"></i> Add Rule
+                    </button>
+                </div>
+            </div>
+            
+            <div class="card fade-in-up">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-book"></i> Personal Rules for Success</h3>
+                </div>
+                <div id="rules-container" class="rules-list">
+                    <!-- Rules will be loaded here -->
+                </div>
+            </div>
+            
+            <div class="card fade-in-up delay-2">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-quote-right"></i> Motivation Library</h3>
+                    <button class="btn btn-sm btn-outline" id="add-quote-btn">
+                        <i class="fas fa-plus"></i> Add Quote
+                    </button>
+                </div>
+                <div id="quotes-container" class="notes-grid">
+                    <!-- Quotes will be loaded here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Skills Page -->
+        <div id="skills-page" class="page-content fade-in">
+            <div class="page-header fade-in-up">
+                <h2 class="page-title">Skills Learnt</h2>
+                <div class="page-actions">
+                    <button class="btn btn-primary" id="add-skill-btn">
+                        <i class="fas fa-plus"></i> Add Skill
+                    </button>
+                </div>
+            </div>
+
+            <div class="card bounce-in">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-trophy"></i> Your Skills</h3>
+                </div>
+                <div id="skills-list" class="skills-grid">
+                    <!-- Skills will be populated here -->
+                </div>
+            </div>
+
+            <!-- Completed Skills Section -->
+            <div id="completed-skills-section">
+                <!-- Completed skills will be loaded here -->
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Goal Modal -->
+    <div id="goal-modal" class="modal" style="display: none;">
+        <div class="modal-content flip-in-y">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Goal</h3>
+                <button class="modal-close close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="goal-form">
+                    <div class="form-group">
+                        <label for="goal-title">Goal Title</label>
+                        <input type="text" id="goal-title" placeholder="What do you want to achieve?" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="goal-description">Description</label>
+                        <textarea id="goal-description" placeholder="Add more details about your goal..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="goal-category">Category</label>
+                        <select id="goal-category">
+                            <option value="health">Health & Fitness</option>
+                            <option value="career">Career</option>
+                            <option value="education">Education</option>
+                            <option value="finance">Finance</option>
+                            <option value="personal">Personal Growth</option>
+                            <option value="hobbies">Hobbies</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="goal-progress">Current Progress (%)</label>
+                        <input type="range" id="goal-progress" min="0" max="100" value="0">
+                        <div class="progress-info">
+                            <span>0%</span>
+                            <span id="progress-value">0%</span>
+                            <span>100%</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="goal-deadline">Target Completion (Optional)</label>
+                        <input type="date" id="goal-deadline">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Goal</button>
+                        <button type="button" class="btn btn-outline close-modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal" style="display: none;">
+        <div class="modal-content flip-in-x">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Project</h3>
+                <button class="modal-close close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="project-form">
+                    <div class="form-group">
+                        <label for="project-title">Project Title</label>
+                        <input type="text" id="project-title" placeholder="Enter project title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-description">Description</label>
+                        <textarea id="project-description" placeholder="Enter project description" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-status">Status</label>
+                        <select id="project-status" required>
+                            <option value="planning">Planning</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-progress">Progress <span id="project-progress-value">0%</span></label>
+                        <input type="range" id="project-progress" min="0" max="100" value="0" class="progress-slider">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-deadline">Deadline</label>
+                        <input type="date" id="project-deadline">
+                    </div>
+
+                    <input type="hidden" id="project-id" value="">
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Project</button>
+                        <button type="button" class="btn btn-outline close-modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notes Modal -->
+    <div id="note-modal" class="modal" style="display: none;">
+        <div class="modal-content zoom-in">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Note or Idea</h3>
+                <button class="modal-close close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="note-form">
+                    <div class="form-group">
+                        <label for="note-title">Title</label>
+                        <input type="text" id="note-title" placeholder="Note title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="note-content">Content</label>
+                        <textarea id="note-content" placeholder="Write your idea or note here..." rows="6"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="note-type">Type</label>
+                        <select id="note-type">
+                            <option value="idea">Idea</option>
+                            <option value="note">Note</option>
+                            <option value="inspiration">Inspiration</option>
+                            <option value="reminder">Reminder</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Note</button>
+                        <button type="button" class="btn btn-outline close-modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skill Modal -->
+    <div id="skill-modal" class="modal" style="display: none;">
+        <div class="modal-content bounce-in">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Skill</h3>
+                <button class="modal-close close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="skill-form">
+                    <div class="form-group">
+                        <label for="skill-name">Skill Name</label>
+                        <input type="text" id="skill-name" placeholder="e.g., Python Programming" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="skill-category">Category</label>
+                        <select id="skill-category" required>
+                            <option value="tech">Technology</option>
+                            <option value="language">Language</option>
+                            <option value="soft-skills">Soft Skills</option>
+                            <option value="creative">Creative</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="skill-status">Status</label>
+                        <select id="skill-status" required>
+                            <option value="planned">Planned to Learn</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="learnt">Learnt</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="proficiency-group">
+                        <label for="skill-proficiency">Proficiency Level</label>
+                        <select id="skill-proficiency" required>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="date-group">
+                        <label for="skill-date">Date <span id="date-label">Learnt</span></label>
+                        <input type="date" id="skill-date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="skill-notes">Notes (Optional)</label>
+                        <textarea id="skill-notes" placeholder="Add any notes about this skill..." rows="3"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Skill</button>
+                        <button type="button" class="btn btn-outline close-modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>
